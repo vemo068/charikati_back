@@ -29,7 +29,7 @@ public class ClientController {
     public ResponseEntity<Client> postProduct(@RequestBody Client client) throws URISyntaxException {
         Client newClient=Client.builder()
                 .name(client.getName())
-                .email(client.getEmail())
+
                 .phone(client.getPhone())
                 .nif(client.getName())
                 .rcn(client.getRcn())

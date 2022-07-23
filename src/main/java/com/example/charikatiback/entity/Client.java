@@ -21,7 +21,7 @@ public class Client {
     private Long clientId;
     private String name;
     private String phone;
-    private String email;
+
     private String nif;
     private String rcn;
 }
