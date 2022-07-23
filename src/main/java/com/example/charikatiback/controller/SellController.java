@@ -6,8 +6,12 @@ import com.example.charikatiback.entity.Sell;
 import com.example.charikatiback.repository.ClientRepository;
 import com.example.charikatiback.repository.SellRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -25,4 +29,26 @@ public class SellController {
         return sellRepository.findByClient(client);
     }
 
+    @PostMapping("addsell")
+    public ResponseEntity<Sell> postProduct(@RequestBody Sell sell) throws URISyntaxException {
+        Sell newSell=Sell.builder()
+                .sellId(sell.getSellId())
+                .client(sell.getClient())
+                .date(sell.getDate())
+                .total(sell.getTotal())
+                .build();
+
+        newSell=sellRepository.save(newSell);
+        if (newSell == null) {
+            return ResponseEntity.notFound().build();
+        }
+        else{
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(newSell.getSellId())
+                    .toUri();
+            return ResponseEntity.created(uri).body(newSell);
+        }
+
+    }
 }
