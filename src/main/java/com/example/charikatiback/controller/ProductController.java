@@ -48,6 +48,7 @@ public class ProductController {
     void deleteProduct(@RequestParam("id") Long productId){
 
         productRepository.deleteById(productId);
+
     }
 
 }
