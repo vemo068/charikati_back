@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BuyOrder {
+public class OrderBuy {
 
     @Id
     @GeneratedValue

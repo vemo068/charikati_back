@@ -22,4 +22,8 @@ public class Product {
     private String name;
     private int price;
     private int stock;
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 }

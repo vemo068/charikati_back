@@ -3,8 +3,10 @@ package com.example.charikatiback.controller;
 
 import com.example.charikatiback.entity.Client;
 import com.example.charikatiback.entity.OrderSell;
+import com.example.charikatiback.entity.Product;
 import com.example.charikatiback.entity.Sell;
 import com.example.charikatiback.repository.OrderSellRepository;
+import com.example.charikatiback.repository.ProductRepository;
 import com.example.charikatiback.repository.SellRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,8 @@ public class OrderSellController {
     private OrderSellRepository orderSellRepository;
     @Autowired
     private SellRepository sellRepository;
-
+    @Autowired
+    private ProductRepository productRepository;
 
     @RequestMapping(value = "ordersells",method = RequestMethod.GET)
     public @ResponseBody
@@ -45,6 +48,10 @@ public class OrderSellController {
             return ResponseEntity.notFound().build();
         }
         else{
+            Product product=productRepository.findByProductId(newOrderSell.getProduct().getProductId());
+
+            product.setStock(product.getStock()-newOrderSell.getQuantity());
+            productRepository.save(product);
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/{id}")
                     .buildAndExpand(newOrderSell.getOrderSellId())
