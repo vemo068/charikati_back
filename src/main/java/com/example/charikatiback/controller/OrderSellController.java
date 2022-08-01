@@ -49,8 +49,12 @@ public class OrderSellController {
         }
         else{
             Product product=productRepository.findByProductId(newOrderSell.getProduct().getProductId());
+            Sell sell=sellRepository.findBySellId(newOrderSell.getSell().getSellId());
 
             product.setStock(product.getStock()-newOrderSell.getQuantity());
+            sell.setTotal(sell.getTotal()+newOrderSell.getTotal());
+
+            sellRepository.save(sell);
             productRepository.save(product);
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/{id}")
@@ -60,4 +64,5 @@ public class OrderSellController {
         }
 
     }
+
 }

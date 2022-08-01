@@ -2,6 +2,7 @@ package com.example.charikatiback.controller;
 
 
 import com.example.charikatiback.entity.Client;
+import com.example.charikatiback.entity.OrderSell;
 import com.example.charikatiback.entity.Sell;
 import com.example.charikatiback.repository.ClientRepository;
 import com.example.charikatiback.repository.SellRepository;
@@ -50,5 +51,12 @@ public class SellController {
             return ResponseEntity.created(uri).body(newSell);
         }
 
+    }
+
+    @RequestMapping(value = "sell",method = RequestMethod.GET)
+    public @ResponseBody
+    Sell getSell(@RequestParam("id") Long sellId){
+        Sell sell=sellRepository.findBySellId(sellId);
+        return sell;
     }
 }

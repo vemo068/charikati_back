@@ -4,11 +4,14 @@ package com.example.charikatiback.controller;
 import com.example.charikatiback.entity.Forni;
 import com.example.charikatiback.repository.ForniRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -18,13 +21,13 @@ public class ForniController {
     @Autowired
     private ForniRepository forniRepository;
 
-    @RequestMapping("forni")
+    @RequestMapping("fornis")
     public List<Forni> getAllForni(){
         return forniRepository.findAll();
     }
 
-    @PostMapping("addForni")
-    public Forni postForni(@RequestBody Forni forni) throws URISyntaxException {
+    @PostMapping("addforni")
+    public ResponseEntity<Forni> postForni(@RequestBody Forni forni) throws URISyntaxException {
         Forni newForni=Forni.builder()
                 .name(forni.getName())
                 .phone(forni.getPhone())
@@ -36,7 +39,11 @@ public class ForniController {
             return null;
         }
         else{
-            return newForni;
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(newForni.getForniId())
+                    .toUri();
+            return ResponseEntity.created(uri).body(newForni);
         }
 
     }

@@ -54,4 +54,11 @@ public class BuyController {
         }
 
     }
+
+    @RequestMapping(value = "buy",method = RequestMethod.GET)
+    public @ResponseBody
+    Buy getBuy(@RequestParam("id") Long buyId){
+        Buy buy=buyRepository.findByBuyId(buyId);
+        return buy;
+    }
 }
