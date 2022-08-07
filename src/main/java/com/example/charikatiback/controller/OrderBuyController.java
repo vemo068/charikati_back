@@ -60,4 +60,14 @@ public class OrderBuyController {
         }
 
     }
+
+
+    @RequestMapping(value="deleteorderbuy", method = {RequestMethod.GET, RequestMethod.DELETE})
+    public @ResponseBody
+    void deleteOrderBuy(@RequestParam("id") Long orderBuyId){
+
+        orderBuyRepository.deleteById(orderBuyId);
+
+
+    }
 }

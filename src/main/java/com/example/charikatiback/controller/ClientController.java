@@ -49,4 +49,14 @@ public class ClientController {
         }
 
     }
+
+
+    @RequestMapping(value="deleteclient", method = {RequestMethod.GET, RequestMethod.DELETE})
+    public @ResponseBody
+    void deleteClient(@RequestParam("id") Long clientId){
+
+        clientRepository.deleteById(clientId);
+
+
+    }
 }

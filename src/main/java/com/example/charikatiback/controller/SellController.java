@@ -59,4 +59,14 @@ public class SellController {
         Sell sell=sellRepository.findBySellId(sellId);
         return sell;
     }
+
+
+    @RequestMapping(value="deletesell", method = {RequestMethod.GET, RequestMethod.DELETE})
+    public @ResponseBody
+    void deleteSell(@RequestParam("id") Long sellId){
+
+        sellRepository.deleteById(sellId);
+
+
+    }
 }

@@ -61,4 +61,13 @@ public class BuyController {
         Buy buy=buyRepository.findByBuyId(buyId);
         return buy;
     }
+
+    @RequestMapping(value="deletebuy", method = {RequestMethod.GET, RequestMethod.DELETE})
+    public @ResponseBody
+    void deleteBuy(@RequestParam("id") Long buyId){
+
+        buyRepository.deleteById(buyId);
+
+
+    }
 }
