@@ -49,8 +49,9 @@ public class OrderBuyController {
         }
         else{
             Product product=productRepository.findByProductId(newOrderBuy.getProduct().getProductId());
-
+            Buy buy=buyRepository.findByBuyId(newOrderBuy.getBuy().getBuyId());
            product.setStock(product.getStock()+newOrderBuy.getQuantity());
+            buy.setTotal(buy.getTotal()+newOrderBuy.getTotal());
             productRepository.save(product);
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                     .path("/{id}")
@@ -65,7 +66,9 @@ public class OrderBuyController {
     @RequestMapping(value="deleteorderbuy", method = {RequestMethod.GET, RequestMethod.DELETE})
     public @ResponseBody
     void deleteOrderBuy(@RequestParam("id") Long orderBuyId){
-
+        OrderBuy orderBuy=orderBuyRepository.findByOrderBuyId(orderBuyId);
+        Buy buy=orderBuy.getBuy();
+        buy.setTotal(buy.getTotal()-orderBuy.getTotal());
         orderBuyRepository.deleteById(orderBuyId);
 
 

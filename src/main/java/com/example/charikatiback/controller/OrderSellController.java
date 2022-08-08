@@ -68,7 +68,9 @@ public class OrderSellController {
     @RequestMapping(value="deleteordersell", method = {RequestMethod.GET, RequestMethod.DELETE})
     public @ResponseBody
     void deleteOrderSell(@RequestParam("id") Long orderSellId){
-
+        OrderSell orderSell=orderSellRepository.findByOrderSellId(orderSellId);
+        Sell sell=orderSell.getSell();
+        sell.setTotal(sell.getTotal()-orderSell.getTotal());
         orderSellRepository.deleteById(orderSellId);
 
 

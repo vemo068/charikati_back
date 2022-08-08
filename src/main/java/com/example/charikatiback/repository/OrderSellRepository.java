@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface OrderSellRepository extends JpaRepository<OrderSell,Long> {
     public List<OrderSell> findBySell(Sell sell);
+
+    void deleteBySell(Sell sell);
+
+    OrderSell findByOrderSellId(Long orderSellId);
 }
