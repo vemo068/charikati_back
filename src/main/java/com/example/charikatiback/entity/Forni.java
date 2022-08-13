@@ -20,4 +20,5 @@ public class Forni {
     private Long forniId;
     private String name;
     private String phone;
+    private boolean isDeleted;
 }

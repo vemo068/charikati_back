@@ -29,7 +29,7 @@ public class BuyController {
     public @ResponseBody
     List<Buy> getBuys(@RequestParam("id") Long ForniId){
         Forni forni=forniRepository.findByForniId(ForniId);
-        return buyRepository.findByForni(forni);
+        return buyRepository.findByForniAndIsDeleted(forni,false);
     }
 
     @PostMapping("addbuy")
@@ -66,7 +66,9 @@ public class BuyController {
     public @ResponseBody
     void deleteBuy(@RequestParam("id") Long buyId){
 
-        buyRepository.deleteById(buyId);
+        Buy buy=buyRepository.findByBuyId(buyId);
+        buy.setDeleted(true);
+        buyRepository.save(buy);
 
 
     }

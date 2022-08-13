@@ -19,6 +19,7 @@ public class Buy {
     private Long buyId;
     private String date;
     private Long total;
+    private boolean isDeleted;
     @ManyToOne
     @JoinColumn(name = "forniId")
     private Forni forni;

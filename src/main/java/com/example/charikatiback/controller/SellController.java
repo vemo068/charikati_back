@@ -27,7 +27,7 @@ public class SellController {
     public @ResponseBody
     List<Sell> getSells(@RequestParam("id") Long clientId){
         Client client=clientRepository.findByClientId(clientId);
-        return sellRepository.findByClient(client);
+        return sellRepository.findByClientAndIsDeleted(client,false);
     }
 
     @PostMapping("addsell")
@@ -65,8 +65,9 @@ public class SellController {
     public @ResponseBody
     void deleteSell(@RequestParam("id") Long sellId){
 
-        sellRepository.deleteById(sellId);
-
+      Sell sell=  sellRepository.findBySellId(sellId);
+      sell.setDeleted(true);
+        sellRepository.save(sell);
 
     }
 }

@@ -19,6 +19,7 @@ public class Sell {
     private Long sellId;
     private String date;
     private Long total;
+    private boolean isDeleted;
     @ManyToOne
     @JoinColumn(name = "clientId")
     private Client client;

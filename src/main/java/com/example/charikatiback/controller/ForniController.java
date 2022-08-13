@@ -20,7 +20,7 @@ public class ForniController {
 
     @RequestMapping("fornis")
     public List<Forni> getAllForni(){
-        return forniRepository.findAll();
+        return forniRepository.findByIsDeleted(false);
     }
 
     @PostMapping("addforni")
@@ -50,7 +50,9 @@ public class ForniController {
     public @ResponseBody
     void deleteForni(@RequestParam("id") Long forniId){
 
-        forniRepository.deleteById(forniId);
+       Forni forni=forniRepository.findByForniId(forniId);
+       forni.setDeleted(true);
+       forniRepository.save(forni);
 
 
     }

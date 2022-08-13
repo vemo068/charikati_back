@@ -23,6 +23,7 @@ public class Product {
     private int sellPrice;
     private int buyPrice;
     private int stock;
+    private boolean isDeleted;
 
     public void setStock(int stock) {
         this.stock = stock;

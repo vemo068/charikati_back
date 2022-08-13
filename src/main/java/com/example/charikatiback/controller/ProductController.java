@@ -19,7 +19,7 @@ public class ProductController {
     private ProductRepository productRepository;
     @GetMapping("products")
     public List<Product> getAllProducts(){
-        return productRepository.findAll();
+        return productRepository.findByIsDeleted(false);
     }
 
     @PostMapping("addproduct")
@@ -49,7 +49,9 @@ public class ProductController {
     public @ResponseBody
     void deleteProduct(@RequestParam("id") Long productId){
 
-        productRepository.deleteById(productId);
+        Product product=productRepository.findByProductId(productId);
+        product.setDeleted(true);
+        productRepository.save(product);
 
     }
 

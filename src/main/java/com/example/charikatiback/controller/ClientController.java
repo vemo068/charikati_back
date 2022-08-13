@@ -28,7 +28,7 @@ public class ClientController {
 
     @GetMapping("clients")
     public List<Client> getAllProducts(){
-        return clientRepository.findAll();
+        return clientRepository.findByIsDeleted(false);
     }
 
 
@@ -65,14 +65,9 @@ public class ClientController {
 
 
 
-     Client client=  clientRepository.findByClientId(clientId);
-     List<Sell> sells=sellRepository.findByClient(client);
-        for(Sell sell: sells){
-            orderSellRepository.deleteBySell(sell);
-            sellRepository.delete(sell);
-        }
-        clientRepository.delete(client);
-
+    Client client=clientRepository.findByClientId(clientId);
+    client.setDeleted(true);
+    clientRepository.save(client);
 
     }
 }

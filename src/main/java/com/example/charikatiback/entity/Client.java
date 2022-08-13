@@ -21,6 +21,7 @@ public class Client {
     private Long clientId;
     private String name;
     private String phone;
+    private boolean isDeleted;
 
     private String nif;
     private String rcn;
