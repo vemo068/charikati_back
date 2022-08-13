@@ -20,7 +20,8 @@ public class Product {
     @GeneratedValue
     private Long productId;
     private String name;
-    private int price;
+    private int sellPrice;
+    private int buyPrice;
     private int stock;
 
     public void setStock(int stock) {

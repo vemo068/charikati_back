@@ -26,7 +26,8 @@ public class ProductController {
     public ResponseEntity<Product> postProduct(@RequestBody Product product) throws URISyntaxException{
         Product newProduct=Product.builder()
                 .name(product.getName())
-                .price(product.getPrice())
+                .sellPrice(product.getSellPrice())
+                .buyPrice(product.getBuyPrice())
                 .stock(0)
                 .build();
 
