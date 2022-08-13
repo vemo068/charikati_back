@@ -35,10 +35,11 @@ public class ClientController {
     @PostMapping("addClient")
     public ResponseEntity<Client> postProduct(@RequestBody Client client) throws URISyntaxException {
         Client newClient=Client.builder()
+                .clientId(client.getClientId())
                 .name(client.getName())
 
                 .phone(client.getPhone())
-                .nif(client.getName())
+                .nif(client.getNif())
                 .rcn(client.getRcn())
 
                 .build();

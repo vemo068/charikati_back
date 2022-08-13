@@ -25,6 +25,7 @@ public class ProductController {
     @PostMapping("addproduct")
     public ResponseEntity<Product> postProduct(@RequestBody Product product) throws URISyntaxException{
         Product newProduct=Product.builder()
+                .productId(product.getProductId())
                 .name(product.getName())
                 .sellPrice(product.getSellPrice())
                 .buyPrice(product.getBuyPrice())
