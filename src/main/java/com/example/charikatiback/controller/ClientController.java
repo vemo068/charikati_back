@@ -2,6 +2,7 @@ package com.example.charikatiback.controller;
 
 
 import com.example.charikatiback.entity.Client;
+import com.example.charikatiback.entity.Forni;
 import com.example.charikatiback.entity.Product;
 import com.example.charikatiback.entity.Sell;
 import com.example.charikatiback.repository.ClientRepository;
@@ -41,6 +42,10 @@ public class ClientController {
                 .phone(client.getPhone())
                 .nif(client.getNif())
                 .rcn(client.getRcn())
+                .address(client.getAddress())
+                .nai(client.getNai())
+                .description(client.getDescription())
+                .nis(client.getNis())
 
                 .build();
 
@@ -69,5 +74,11 @@ public class ClientController {
     client.setDeleted(true);
     clientRepository.save(client);
 
+    }
+    @RequestMapping(value = "client",method = RequestMethod.GET)
+    public @ResponseBody
+    Client getClient(@RequestParam("id") Long clientId){
+        Client client=clientRepository.findByClientId(clientId);
+        return client;
     }
 }

@@ -15,18 +15,10 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Client {
+public class User {
     @Id
     @GeneratedValue
-    private Long clientId;
+    private Long userId;
     private String name;
-    private String phone;
-    private boolean isDeleted;
-
-    private String nif;
-    private String rcn;
-    private String address;
-    private String description;
-    private String nai;
-    private String nis;
+    private String password;
 }

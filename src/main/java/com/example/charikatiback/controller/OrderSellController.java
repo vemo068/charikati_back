@@ -71,6 +71,9 @@ public class OrderSellController {
         OrderSell orderSell=orderSellRepository.findByOrderSellId(orderSellId);
         Sell sell=orderSell.getSell();
         sell.setTotal(sell.getTotal()-orderSell.getTotal());
+        Product product=orderSell.getProduct();
+        product.setStock(product.getStock()+orderSell.getQuantity());
+        productRepository.save(product);
         orderSellRepository.deleteById(orderSellId);
 
 

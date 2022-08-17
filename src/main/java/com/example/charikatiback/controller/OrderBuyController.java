@@ -67,8 +67,13 @@ public class OrderBuyController {
     public @ResponseBody
     void deleteOrderBuy(@RequestParam("id") Long orderBuyId){
         OrderBuy orderBuy=orderBuyRepository.findByOrderBuyId(orderBuyId);
+
+
         Buy buy=orderBuy.getBuy();
         buy.setTotal(buy.getTotal()-orderBuy.getTotal());
+        Product product=orderBuy.getProduct();
+        product.setStock(product.getStock()-orderBuy.getQuantity());
+        productRepository.save(product);
         orderBuyRepository.deleteById(orderBuyId);
 
 

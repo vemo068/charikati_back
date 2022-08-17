@@ -1,6 +1,7 @@
 package com.example.charikatiback.controller;
 
 
+import com.example.charikatiback.entity.Buy;
 import com.example.charikatiback.entity.Forni;
 import com.example.charikatiback.repository.ForniRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class ForniController {
     @PostMapping("addforni")
     public ResponseEntity<Forni> postForni(@RequestBody Forni forni) throws URISyntaxException {
         Forni newForni=Forni.builder()
+                .forniId(forni.getForniId())
                 .name(forni.getName())
                 .phone(forni.getPhone())
 
@@ -55,6 +57,13 @@ public class ForniController {
        forniRepository.save(forni);
 
 
+    }
+
+    @RequestMapping(value = "forni",method = RequestMethod.GET)
+    public @ResponseBody
+    Forni getForni(@RequestParam("id") Long forniId){
+        Forni forni=forniRepository.findByForniId(forniId);
+        return forni;
     }
 
 
