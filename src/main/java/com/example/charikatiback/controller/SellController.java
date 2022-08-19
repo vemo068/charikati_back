@@ -23,6 +23,23 @@ public class SellController {
     @Autowired
     private ClientRepository clientRepository;
 
+
+    @GetMapping("allsells")
+    public List<Sell> getAllSells(){
+        return sellRepository.findAll();
+    }
+    @GetMapping("sellstotal")
+    public Long getAllSellsTotal() {
+        Long total = Long.valueOf(0);
+
+        for (Sell sell : sellRepository.findAll()) {
+            total += Long.valueOf(sell.getTotal());
+
+
+        }
+        return total;
+    }
+
     @RequestMapping(value = "sells",method = RequestMethod.GET)
     public @ResponseBody
     List<Sell> getSells(@RequestParam("id") Long clientId){

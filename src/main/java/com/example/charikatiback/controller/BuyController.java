@@ -25,6 +25,26 @@ public class BuyController {
     @Autowired
     private ForniRepository forniRepository;
 
+
+    @GetMapping("allbuys")
+    public List<Buy> getAllBuys(){
+        return buyRepository.findAll();
+    }
+
+
+    @GetMapping("buystotal")
+    public Long getAllBuysTotal() {
+        Long total = Long.valueOf(0);
+
+        for (Buy buy : buyRepository.findAll()) {
+            total += Long.valueOf(buy.getTotal());
+
+
+        }
+        return total;
+    }
+
+
     @RequestMapping(value = "buys",method = RequestMethod.GET)
     public @ResponseBody
     List<Buy> getBuys(@RequestParam("id") Long ForniId){
