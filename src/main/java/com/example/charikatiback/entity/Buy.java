@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Builder
 public class Buy {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long buyId;
     private String date;
     private Long total;

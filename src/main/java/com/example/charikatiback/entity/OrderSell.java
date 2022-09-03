@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Builder
 public class OrderSell {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderSellId;
     private Long total;
     private int quantity;

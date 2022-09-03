@@ -1,9 +1,9 @@
 package com.example.charikatiback.controller;
 
 
-import com.example.charikatiback.entity.Sell;
+import com.example.charikatiback.entity.Buy;
 import com.example.charikatiback.entity.User;
-import com.example.charikatiback.repository.UserRepository;
+import com.example.charikatiback.repository.UseerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,18 +11,22 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 @RestController
 @RequestMapping
 public class AuthController {
 
     @Autowired
-    private UserRepository userRepository;
-
+    private UseerRepository useerRepository;
+    @GetMapping("users")
+    public List<User> getAllUsers(){
+        return useerRepository.findAll();
+    }
     @PostMapping("/login")
     public User getCurrentUser(@RequestBody User loginInfo) throws URISyntaxException {
 
-        User currentUser=userRepository.findByNameAndPassword(loginInfo.getName(), loginInfo.getPassword());
+        User currentUser= useerRepository.findByNameAndPassword(loginInfo.getName(), loginInfo.getPassword());
 
 
         return currentUser;
@@ -36,7 +40,7 @@ public class AuthController {
                 .password(user.getPassword())
                 .build();
 
-        newUser=userRepository.save(newUser);
+        newUser= useerRepository.save(newUser);
         if (newUser == null) {
             return ResponseEntity.notFound().build();
         }
