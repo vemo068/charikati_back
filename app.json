@@ -1,0 +1,8 @@
+{
+  "name": "charikati",
+  "buildpacks": [
+    {
+      "url": "heroku/gradle"
+    }
+  ]
+}
