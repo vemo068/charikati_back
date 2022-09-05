@@ -17,8 +17,14 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductRepository productRepository;
-    @GetMapping("products")
+
+    @GetMapping("allproducts")
     public List<Product> getAllProducts(){
+        return productRepository.findAll();
+    }
+
+    @GetMapping("products")
+    public List<Product> getProducts(){
         return productRepository.findByIsDeleted(false);
     }
 
