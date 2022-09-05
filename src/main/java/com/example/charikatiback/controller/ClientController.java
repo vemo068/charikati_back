@@ -71,6 +71,12 @@ public class ClientController {
 
 
     Client client=clientRepository.findByClientId(clientId);
+        for (Sell sell : sellRepository.findByClientAndIsDeleted(client,false)) {
+            sell.setDeleted(true);
+            sellRepository.save(sell);
+
+
+        }
     client.setDeleted(true);
     clientRepository.save(client);
 
