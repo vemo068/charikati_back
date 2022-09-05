@@ -32,7 +32,7 @@ public class SellController {
     public Long getAllSellsTotal() {
         Long total = Long.valueOf(0);
 
-        for (Sell sell : sellRepository.findAll()) {
+        for (Sell sell : sellRepository.findByIsDeleted(false)) {
             total += Long.valueOf(sell.getTotal());
 
 

@@ -36,7 +36,7 @@ public class BuyController {
     public Long getAllBuysTotal() {
         Long total = Long.valueOf(0);
 
-        for (Buy buy : buyRepository.findAll()) {
+        for (Buy buy : buyRepository.findByIsDeleted(false)) {
             total += Long.valueOf(buy.getTotal());
 
 

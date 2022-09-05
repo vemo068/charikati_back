@@ -11,6 +11,7 @@ import java.util.List;
 public interface BuyRepository extends JpaRepository<Buy, Long> {
     public Buy findByBuyId(Long id);
     public List<Buy> findByForniAndIsDeleted(Forni forni ,boolean isDeleted);
+    public List<Buy> findByIsDeleted(boolean isDeleted);
 
 }
 
