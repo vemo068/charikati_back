@@ -4,6 +4,9 @@ package com.example.charikatiback.controller;
 import com.example.charikatiback.entity.Product;
 import com.example.charikatiback.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -11,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping
@@ -20,12 +24,22 @@ public class ProductController {
 
     @GetMapping("allproducts")
     public List<Product> getAllProducts(){
-        return productRepository.findAll();
+        return productRepository.findAll(
+
+        );
     }
 
     @GetMapping("products")
-    public List<Product> getProducts(){
-        return productRepository.findByIsDeleted(false);
+    public Page<Product> getProducts(
+            @RequestParam Optional<Integer> page
+
+            ){
+        return productRepository.findByIsDeleted(false, PageRequest.of(
+                page.orElse(0),
+                15,
+                Sort.Direction.ASC ,"name"
+
+        ));
     }
 
     @PostMapping("addproduct")
